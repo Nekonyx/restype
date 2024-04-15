@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "strict": true,
-    "outDir": "lib",
+    "outDir": "bin",
     "target": "es2022",
     "module": "node16",
     "moduleResolution": "node16",
