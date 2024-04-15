@@ -67,15 +67,15 @@ importers:
         specifier: ^17.7.2
         version: 17.7.2
     devDependencies:
-      '@restype/core':
-        specifier: workspace:*
-        version: link:../restype
       '@types/node':
         specifier: ^20.12.7
         version: 20.12.7
       '@types/yargs':
         specifier: ^17.0.32
         version: 17.0.32
+      restype:
+        specifier: workspace:*
+        version: link:../restype
 
 packages:
 
