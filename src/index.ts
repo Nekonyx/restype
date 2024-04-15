@@ -1,3 +1,5 @@
+import 'reflect-metadata'
+
 // Decorators
 export * from './decorators/body'
 export * from './decorators/consumes'

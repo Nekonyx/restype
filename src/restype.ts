@@ -1,4 +1,4 @@
-import { DriverCtor, IDriver } from './drivers/driver'
+import { IDriver, IDriverOptions } from './drivers/driver'
 import { IGuard } from './interfaces/guard'
 import { IInterceptor } from './interfaces/interceptor'
 import { IMiddleware } from './interfaces/middleware'
@@ -6,8 +6,8 @@ import { IPipe } from './interfaces/pipe'
 import { ControllerMetadata } from './metadata/controller-metadata'
 
 export interface IRestypeOptions<T extends IDriver> {
-  driver?: DriverCtor<T>
-  driverFactory?(restype: Restype<T>): T
+  driver?: T
+  driverFactory?(opts: IDriverOptions<T>): T
   controllers?: (Function | string)[]
   middlewares?: (Function | string)[]
   guards?: (Function | string)[]
@@ -28,9 +28,11 @@ export class Restype<T extends IDriver> {
     Restype.instances.push(this)
 
     if (opts.driver) {
-      this.driver = new opts.driver(this)
+      this.driver = opts.driver
     } else if (opts.driverFactory) {
-      this.driver = opts.driverFactory(this)
+      this.driver = opts.driverFactory({
+        restype: this
+      })
     } else {
       throw new Error('Driver or driverFactory must be provided.')
     }
@@ -57,10 +59,10 @@ export class Restype<T extends IDriver> {
   }
 
   public async setup() {
-    //
+    await this.driver.setup()
   }
 
-  public getHandler() {
-    return this.driver.getHandler()
+  public getHandlers(): ReturnType<T['getHandlers']> {
+    return this.driver.getHandlers()
   }
 }

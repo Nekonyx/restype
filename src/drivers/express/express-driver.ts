@@ -1,12 +1,21 @@
-import { Restype } from '../../restype'
-import { IDriver } from '../driver'
+import { IDriver, IDriverOptions } from '../driver'
+
+import type { RequestHandler } from 'express'
+
+export interface IExpressDriverOptions extends IDriverOptions<ExpressDriver> {
+  //
+}
 
 export class ExpressDriver implements IDriver {
-  public constructor(restype: Restype<ExpressDriver>) {
+  public constructor(opts: IExpressDriverOptions) {
     //
   }
 
-  public getHandler() {
-    throw new Error('Method not implemented.')
+  public async setup() {
+    //
+  }
+
+  public getHandlers(): RequestHandler[] {
+    return []
   }
 }
