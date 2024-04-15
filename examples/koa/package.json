@@ -1,9 +1,9 @@
 {
   "private": true,
   "dependencies": {
-    "@restype/core": "latest",
     "@koa/router": "latest",
-    "koa": "latest"
+    "koa": "latest",
+    "restype": "latest"
   },
   "devDependencies": {
     "typescript": "latest"

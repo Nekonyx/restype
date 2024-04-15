@@ -1,5 +1,5 @@
 {
-  "name": "@restype/core",
+  "name": "restype",
   "version": "0.0.1",
   "license": "MIT",
   "description": "Create declarative controllers with decorators for Express/Koa",

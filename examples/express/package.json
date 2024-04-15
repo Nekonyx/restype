@@ -1,7 +1,7 @@
 {
   "private": true,
   "dependencies": {
-    "@restype/core": "latest",
+    "restype": "latest",
     "express": "latest"
   },
   "devDependencies": {
