@@ -3,7 +3,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["/packages/*/lib/", "/packages/*/bin/"],
+      "outputs": ["packages/*/lib/", "packages/*/bin/"],
       "outputMode": "new-only"
     }
   }
