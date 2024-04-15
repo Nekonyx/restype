@@ -19,36 +19,35 @@ class UserController {
 }
 ```
 
-2. Prepare Restype
-
-```ts
-// restype.ts
-import { Restype, KoaDriver } from 'restype'
-import { UserController } from './controllers/user.controller'
-
-export const restype = new Restype({
-  driver: KoaDriver,
-  controllers: [UserController],
-  // or glob
-  controllers: [__dirname + './controllers/**/*.controller.{js,ts}']
-})
-```
-
-3. Prepare your app
+2. Prepare your app
 
 ```ts
 // app.ts
-import * as Koa from 'koa'
-import * as koaBody from 'koa-body'
-
-import { restype } from './restype'
+import Koa from 'koa'
+import Router from '@koa/router'
+import { KoaDriver, Restype } from 'restype'
 
 const app = new Koa()
+const router = new Router()
 
-app.use(koaBody())
-app.use(...restype.getHandlers())
+const restype = new Restype<KoaDriver>({
+  driverFactory(opts) {
+    return new KoaDriver({
+      router,
+      ...opts
+    })
+  }
+})
 
-app.listen(3000)
+for (const handler of restype.getHandlers()) {
+  app.use(handler)
+}
+
+restype.setup().then(() => {
+  app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000')
+  })
+})
 ```
 
 ### Drivers
@@ -56,10 +55,18 @@ app.listen(3000)
 #### Using Koa driver
 
 ```ts
+import Router from '@koa/router'
 import { Restype, KoaDriver } from 'restype'
 
-const restype = new Restype({
-  driver: KoaDriver
+const router = new Router()
+
+const restype = new Restype<KoaDriver>({
+  driverFactory(opts) {
+    return new KoaDriver({
+      router,
+      ...opts
+    })
+  }
 })
 ```
 
@@ -68,8 +75,10 @@ const restype = new Restype({
 ```ts
 import { Restype, ExpressDriver } from 'restype'
 
-const restype = new Restype({
-  driver: ExpressDriver
+const restype = new Restype<ExpressDriver>({
+  driverFactory(opts) {
+    return new ExpressDriver(opts)
+  }
 })
 ```
 
@@ -79,14 +88,21 @@ const restype = new Restype({
 import { Restype, IDriver } from 'restype'
 
 class CustomDriver implements IDriver {
-  //
+  public async setup(): Promise<void> {
+    // when Restype.setup() is called
+  }
+
+  public async getHandlers(): any[] {
+    //
+  }
 }
 
-const restype = new Restype({
-  driver: CustomDriver,
+const restype = new Restype<CustomDriver>({
+  driver: new CustomDriver(),
   // or
-  driverFactory(restype) {
-    return new CustomDriver(restype)
+  driverFactory(opts) {
+    // opts.restype has Restype instance, so you can pass it if it's required in your custom driver
+    return new CustomDriver()
   }
 })
 ```
