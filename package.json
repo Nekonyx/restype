@@ -1,15 +1,21 @@
 {
   "name": "restype",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "Create declarative controllers with decorators for Express/Koa",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json"
+    "build": "tsc -p tsconfig.build.json",
+    "watch": "tsc -p tsconfig.build.json -w"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nekonyx/restype"
+  },
+  "files": [
+    "lib"
+  ],
   "peerDependencies": {
     "reflect-metadata": "^0.2.2"
   },
