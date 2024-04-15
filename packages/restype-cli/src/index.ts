@@ -10,6 +10,7 @@ yargs
   .command(new GenerateSwaggerCommand())
   .command(new VersionCommand())
   .recommendCommands()
+  .demandCommand(1)
   .strict()
   .help('h')
   .alias('v', 'version')
