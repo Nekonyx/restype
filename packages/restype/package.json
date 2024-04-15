@@ -1,0 +1,54 @@
+{
+  "name": "@restype/core",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "Create declarative controllers with decorators for Express/Koa",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nekonyx/restype",
+    "directory": "packages/restype"
+  },
+  "files": [
+    "lib"
+  ],
+  "peerDependencies": {
+    "@koa/router": "^12.0.1",
+    "express": "^4.19.2",
+    "koa": "^2.15.3",
+    "reflect-metadata": "^0.2.2"
+  },
+  "peerDependenciesMeta": {
+    "@koa/router": {
+      "optional": true
+    },
+    "koa": {
+      "optional": true
+    },
+    "express": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "glob": "^10",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@koa/router": "^12.0.1",
+    "@types/express": "^4.17.21",
+    "@types/koa": "^2.15.0",
+    "@types/koa__router": "^12.0.4",
+    "@types/node": "^20.12.7",
+    "express": "^4.19.2",
+    "koa": "^2.15.3",
+    "reflect-metadata": "^0.2.2",
+    "typescript": "^5.4.5"
+  }
+}

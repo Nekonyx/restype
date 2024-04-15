@@ -1,12 +1,15 @@
-import { ExpressDriver, Restype } from '../src'
+import { KoaDriver, Restype } from '@restype/core'
 
-import express from 'express'
+import Router from '@koa/router'
+import Koa from 'koa'
 
-const app = express()
+const app = new Koa()
+const router = new Router()
 
-const restype = new Restype<ExpressDriver>({
+const restype = new Restype<KoaDriver>({
   driverFactory(opts) {
-    return new ExpressDriver({
+    return new KoaDriver({
+      router,
       ...opts
     })
   }

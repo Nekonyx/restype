@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "dependencies": {
+    "@restype/core": "latest",
+    "@koa/router": "latest",
+    "koa": "latest"
+  },
+  "devDependencies": {
+    "typescript": "latest"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "@restype/cli",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "CLI for Restype",
+  "main": "bin/index.js",
+  "bin": {
+    "restype": "bin/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nekonyx/restype",
+    "directory": "packages/restype-cli"
+  },
+  "files": [
+    "bin"
+  ],
+  "peerDependencies": {
+    "@restype/core": "*",
+    "reflect-metadata": "^0.2.2"
+  },
+  "dependencies": {
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@restype/core": "workspace:*",
+    "@types/node": "^20.12.7",
+    "@types/yargs": "^17.0.32"
+  }
+}

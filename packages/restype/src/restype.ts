@@ -62,7 +62,7 @@ export class Restype<T extends IDriver> {
     await this.driver.setup()
   }
 
-  public getHandlers(): ReturnType<T['getHandlers']> {
-    return this.driver.getHandlers()
+  public getHandlers() {
+    return this.driver.getHandlers() as ReturnType<T['getHandlers']>
   }
 }
