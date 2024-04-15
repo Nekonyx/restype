@@ -1,6 +1,6 @@
 {
   "name": "restype-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "description": "CLI for Restype",
   "main": "bin/index.js",
