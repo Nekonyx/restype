@@ -1,21 +1,20 @@
+import { IIocAdapter } from '../interfaces/ioc-adapter.interface'
+import { Constructable } from '../types/constructable'
 import { DefaultIocAdapter } from './default-ioc-adapter'
-import type { Ctor, IIocAdapter } from './ioc-adapter'
 
-const defaultIocAdapter: IIocAdapter = new DefaultIocAdapter()
-
-let userIocAdapter: IIocAdapter | null = null
+let customIocAdapter: IIocAdapter | null = null
 
 export function useContainer(adapter: IIocAdapter) {
-  userIocAdapter = adapter
+  customIocAdapter = adapter
 }
 
 export function getContainer(): IIocAdapter {
-  return userIocAdapter ?? defaultIocAdapter
+  return customIocAdapter ?? DefaultIocAdapter.instance
 }
 
-export function getFromContainer<T>(target: Ctor<T>): T {
+export function getFromContainer<T>(target: Constructable<T>): T {
   // prettier-ignore
-  return userIocAdapter
-    ? userIocAdapter.get(target)
-    : defaultIocAdapter.get(target)
+  return customIocAdapter
+    ? customIocAdapter.get(target)
+    : DefaultIocAdapter.instance.get(target)
 }

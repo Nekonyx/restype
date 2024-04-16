@@ -1,44 +1,23 @@
-import { IGuard } from '../interfaces/guard'
-import { IInterceptor } from '../interfaces/interceptor'
-import { IMiddleware } from '../interfaces/middleware'
-import { IPipe } from '../interfaces/pipe'
-import { MethodMetadata } from './method-metadata'
+import { ActionMetadata } from './action-metadata'
+import { GuardMetadata } from './guard-metadata'
+import { InterceptorMetadata } from './interceptor-metadata'
+import { MiddlewareMetadata } from './middleware-metadata'
+import { PipeMetadata } from './pipe-metadata'
 
 export class ControllerMetadata {
-  public readonly methods: MethodMetadata[] = []
-  public readonly guards: IGuard[] = []
-  public readonly interceptors: IInterceptor[] = []
-  public readonly middlewares: IMiddleware[] = []
-  public readonly pipes: IPipe[] = []
+  public readonly instance: Function
+  public readonly route: string
+  public readonly actions: ActionMetadata[] = []
+  public readonly guards: GuardMetadata[] = []
+  public readonly interceptors: InterceptorMetadata[] = []
+  public readonly middlewares: MiddlewareMetadata[] = []
+  public readonly pipes: PipeMetadata[] = []
   public readonly tags: string[] = []
   public produces?: string
   public consumes?: string
 
-  public addMethod(method: MethodMetadata) {
-    this.methods.push(method)
-  }
-
-  public addGuard() {
-    //
-  }
-
-  public addInterceptor() {
-    //
-  }
-
-  public addPipe() {
-    //
-  }
-
-  public setProduces() {
-    //
-  }
-
-  public setConsumes() {
-    //
-  }
-
-  public setTags() {
-    //
+  public constructor(instance: Function, route: string) {
+    this.instance = instance
+    this.route = route
   }
 }

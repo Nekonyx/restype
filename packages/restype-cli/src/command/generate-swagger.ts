@@ -5,7 +5,11 @@ export class GenerateSwaggerCommand implements CommandModule {
   public readonly describe = 'Generate OpenAPI 3.0 spec'
 
   public builder(args: Argv) {
-    return args
+    return args.options('instance', {
+      alias: 'i',
+      description: 'Path to the instance',
+      type: 'string'
+    })
   }
 
   public async handler(args: Arguments) {

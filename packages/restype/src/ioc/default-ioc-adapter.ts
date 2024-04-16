@@ -1,9 +1,12 @@
-import type { Ctor, IIocAdapter } from './ioc-adapter'
+import { IIocAdapter } from '../interfaces/ioc-adapter.interface'
+import { Constructable } from '../types/constructable'
 
 export class DefaultIocAdapter implements IIocAdapter {
-  private readonly container = new Map<Ctor<any>, any>()
+  public static readonly instance = new DefaultIocAdapter()
 
-  public get<T>(target: Ctor<T>): T {
+  public readonly container = new Map<Constructable<any>, any>()
+
+  public get<T>(target: Constructable<T>): T {
     let instance = this.container.get(target)
 
     if (!instance) {

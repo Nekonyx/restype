@@ -29,14 +29,11 @@ import { KoaDriver, Restype } from 'restype'
 
 const app = new Koa()
 const router = new Router()
-
 const restype = new Restype<KoaDriver>({
-  driverFactory(opts) {
-    return new KoaDriver({
-      router,
-      ...opts
-    })
-  }
+  driver: new KoaDriver({
+    app,
+    router
+  })
 })
 
 for (const handler of restype.getHandlers()) {
@@ -55,30 +52,31 @@ restype.setup().then(() => {
 #### Using Koa driver
 
 ```ts
+import Koa from 'koa'
 import Router from '@koa/router'
 import { Restype, KoaDriver } from 'restype'
 
+const app = new Koa()
 const router = new Router()
-
 const restype = new Restype<KoaDriver>({
-  driverFactory(opts) {
-    return new KoaDriver({
-      router,
-      ...opts
-    })
-  }
+  driver: new KoaDriver({
+    app,
+    router
+  })
 })
 ```
 
 #### Using Express driver
 
 ```ts
+import express from 'express'
 import { Restype, ExpressDriver } from 'restype'
 
+const app = express()
 const restype = new Restype<ExpressDriver>({
-  driverFactory(opts) {
-    return new ExpressDriver(opts)
-  }
+  driver: new ExpressDriver({
+    app
+  })
 })
 ```
 
@@ -89,7 +87,7 @@ import { Restype, IDriver } from 'restype'
 
 class CustomDriver implements IDriver {
   public async setup(): Promise<void> {
-    // when Restype.setup() is called
+    // executed when Restype.setup() is called
   }
 
   public async getHandlers(): any[] {
@@ -100,8 +98,7 @@ class CustomDriver implements IDriver {
 const restype = new Restype<CustomDriver>({
   driver: new CustomDriver(),
   // or
-  driverFactory(opts) {
-    // opts.restype has Restype instance, so you can pass it if it's required in your custom driver
+  driverFactory(restype: Restype<CustomDriver>) {
     return new CustomDriver()
   }
 })
